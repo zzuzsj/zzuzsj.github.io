@@ -18,7 +18,6 @@
     }
     var p=createImg.prototype;
     p.drawImg=function (context,index) {
-        // console.log(1);
         var img=new Image();
         img.src=this._url;
             switch (this._styleIndex){
