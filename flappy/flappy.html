@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flappy N8</title>
+    <style>
+        #contentDiv{
+            background: rgb(113,197,205);
+            width:600px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div id="contentDiv"></div>
+    <script src="jquery.min.js"></script>
+    <script src="konva.min.js"></script>
+    <script src="flappy.js"></script>
+    <script type="text/javascript">
+        (function(){
+            var flappy=new window.Flappy();
+            flappy.bindStage();
+            flappy.init();
+        })();
+    </script>
+</body>
+
+</html>
