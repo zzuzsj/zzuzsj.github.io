@@ -18,6 +18,19 @@
                 listening: true
             });
             that._layer = new Konva.Layer();
+            var fastLayer=new Konva.FastLayer();
+            var back=new Konva.Image({
+                width:that._stageW,
+                height:that._stageH,
+                x:0,
+                y:0,
+            });
+            fastLayer.add(back);
+            that._back.onload=function(){
+                back.image(that._back);
+                fastLayer.draw();
+            };
+            that._stage.add(fastLayer);
             that._stage.add(that._layer);
             that.addStart();
             that._stage.on('click', function () {
@@ -60,7 +73,7 @@
             var that = this;
             that._startText = new Konva.Text({
                 text: 'Game Start',
-                fill: 'rgb(168,120,79)',
+                fill: 'rgb(84,38,26)',
                 fontStyle: 'bold',
                 fontSize: 30,
                 fontFamily: 'Times New Roman'
@@ -87,7 +100,7 @@
             that._total.y(that._stageH / 2 - toh / 2 - 20);
             that._overText = new Konva.Text({
                 text: 'Restart',
-                fill: 'rgb(168,120,79)',
+                fill: 'rgb(84,38,26)',
                 fontStyle: 'bold',
                 fontSize: 30,
                 fontFamily: 'Times New Roman'
