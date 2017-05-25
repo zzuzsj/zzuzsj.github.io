@@ -18,15 +18,15 @@
                 listening: true
             });
             that._layer = new Konva.Layer();
-            var fastLayer=new Konva.FastLayer();
-            var back=new Konva.Image({
-                width:that._stageW,
-                height:that._stageH,
-                x:0,
-                y:0,
+            var fastLayer = new Konva.FastLayer();
+            var back = new Konva.Image({
+                width: that._stageW,
+                height: that._stageH,
+                x: 0,
+                y: 0,
             });
             fastLayer.add(back);
-            that._back.onload=function(){
+            that._back.onload = function () {
                 back.image(that._back);
                 fastLayer.draw();
             };
@@ -44,6 +44,16 @@
                 } else if (text == that._overText) {
                     that._stage.removeChildren();
                     that._layer = new Konva.Layer();
+                    var fastLayer = new Konva.FastLayer();
+                    var back = new Konva.Image({
+                        width: that._stageW,
+                        height: that._stageH,
+                        x: 0,
+                        y: 0,
+                        image: that._back
+                    });
+                    fastLayer.add(back);
+                    that._stage.add(fastLayer);
                     that._stage.add(that._layer);
                     that.init();
                     that.gameStart();
@@ -218,6 +228,9 @@
             }
             $(document).on('keydown', function (e) {
                 e.preventDefault();
+                if (that._myArr.length <= 0) {
+                    return;
+                }
                 switch (e.keyCode) {
                     case 37:
                         ableMove(3);
@@ -240,9 +253,9 @@
                 }
             });
             $(document).on('keyup', function (e) {
-                // that._disableMoveTime = setTimeout(function () {
-                that._myArr[0]._moveAble = false;
-                // }, 100);
+                if (that._myArr, length > 0) {
+                    that._myArr[0]._moveAble = false;
+                }
             });
         },
         gameOver: function () {
