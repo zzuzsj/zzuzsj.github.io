@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flappy N8</title>
+    <style>
+        #contentDiv{
+            background: rgb(113,197,205);
+            width:800px;
+            height: 550px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div id="contentDiv"></div>
+    <script src="jquery.min.js"></script>
+    <script src="konva.min.js"></script>
+    <script src="bullet.js"></script>
+    <script src="tank.js"></script>
+    <script src="main.js"></script>
+    <script type="text/javascript">
+        (function(){
+            var main=new window.Main();
+            main._tankType0=new Image();
+            main._tankType0.src="tank_a.png";
+            main._tankType1=new Image();
+            main._tankType1.src="tank_b.png";
+            main._tankType2=new Image();
+            main._tankType2.src="tank_c.png";
+            main._tankType3=new Image();
+            main._tankType3.src="tank_d.png";
+            main.bindStage();
+            main.init();
+        })();
+    </script>
+</body>
+
+</html>
