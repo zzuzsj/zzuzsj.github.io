@@ -33,7 +33,7 @@
             that._stage.add(fastLayer);
             that._stage.add(that._layer);
             that.addStart();
-            that._stage.on('touchstart', function () {
+            that._stage.on('click', function () {
                 var text = that._layer.getIntersection(that._stage.getPointerPosition(), 'Text');
                 if (!text) {
                     return;
