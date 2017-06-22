@@ -15,9 +15,11 @@
         <canvas id="sky"></canvas>
         <div id="textArea">
             <div id="title"></div>
+            <div id="summary">欢迎来到我的小站，这里是梦想与星空的舞台！
+            </div>
         </div>
         <div id="chooseList">
-            <!--<div class="choose">
+            <div class="choose">
                 <div class="face faceLeft"></div>
                 <div class="face faceRight"></div>
                 <div class="face faceTop"></div>
@@ -25,7 +27,7 @@
                 <div class="face facePre"></div>
                 <div class="face faceBehind"></div>
                 <a id="resume" class="chooseText">Resume</a>
-            </div>-->
+            </div>
             <div class="choose">
                 <div class="face faceLeft"></div>
                 <div class="face faceRight"></div>
@@ -54,10 +56,20 @@
                 <a id="about" href="#" class="chooseText">About</a>
             </div>
         </div>
+        <div id="musicArea">
+            <div id="markContainer">
+                <div id="musicMark" class="markDiv"></div>
+                <div id="musicControl" class="markDiv" data-status="play"></div>
+                <!--<div id="musicPlay" class="markDiv"></div>
+                <div id="musicPause" class="markDiv"></div>-->
+            </div>
+            <div id="musicInfo"></div>
+            <span id="musicTips">把音乐文件拖入至此可以播放</span>
+        </div>
+        <audio id="backAudio" src="res/index/backMusic.mp3" autoplay="autoplay" loop="loop">
+            您的浏览器不支持 audio 标签。
+        </audio>
     </div>
-    <audio id="backAudio" src="res/index/backMusic.mp3" autoplay="autoplay" loop="loop">
-        您的浏览器不支持 audio 标签。
-    </audio>
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/layui/lay/dest/layui.all.js"></script>
     <script src="js/util/Stats.min.js"></script>
