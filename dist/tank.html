@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tank War</title>
+    <style>
+        #contentDiv {
+            background: rgb(113, 197, 205);
+            width: 800px;
+            height: 550px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="contentDiv"></div>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script>//解决jq与electron冲突问题
+        if (typeof module === 'object') { window.jQuery = window.$ = module.exports; };
+    </script>
+    <script src="../vendor/konva/konva.min.js"></script>
+    <script src="./js/game/tank/bullet.min.js"></script>
+    <script src="./js/game/tank/tank.min.js"></script>
+    <script src="./js/game/tank/main.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var main = new window.Main();
+            main._tankType0 = new Image();
+            main._tankType0.src = "./res/game/tank/tank_a.png";
+            main._tankType1 = new Image();
+            main._tankType1.src = "./res/game/tank/tank_b.png";
+            main._tankType2 = new Image();
+            main._tankType2.src = "./res/game/tank/tank_c.png";
+            main._tankType3 = new Image();
+            main._tankType3.src = "./res/game/tank/tank_d.png";
+            main._back = new Image();
+            main._back.src = "./res/game/tank/back.jpg";
+            main.bindStage();
+            main.init();
+        })();
+    </script>
+</body>
+
+</html>

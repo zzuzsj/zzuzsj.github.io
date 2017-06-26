@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../vendor/swiper/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="./css/game.css">
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <a href="./flappy.html" class="swiper-slide">
+                <img src="./res/game/flappy/thumb.png" alt="" class="slideImg">
+            </a>
+            <a href="./tank.html" class="swiper-slide">
+                <img src="./res/game/tank/thumb.png" alt="" class="slideImg">
+            </a>
+            <a class="swiper-slide">Slide 3</a>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- 如果需要滚动条 -->
+        <!--<div class="swiper-scrollbar"></div>-->
+    </div>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/swiper/swiper-3.4.2.jquery.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var mySwiper = new Swiper('.swiper-container', {
+                direction: 'horizontal',
+                loop: true,
+                grabCursor: true,
+                effect: 'coverflow',
+                slidesPerView: 2,
+                centeredSlides: true,
+                coverflow: {
+                    rotate: 30,
+                    stretch: 10,
+                    depth: 60,
+                    modifier: 2,
+                    slideShadows: false
+                },
+
+
+                // 如果需要分页器
+                pagination: '.swiper-pagination',
+
+                // 如果需要前进后退按钮
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+
+                // 如果需要滚动条
+                // scrollbar: '.swiper-scrollbar',
+            })
+        })();
+    </script>
+</body>
+
+</html>
