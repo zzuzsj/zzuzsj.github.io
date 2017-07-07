@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .progress-container {
+            /*display: none;*/
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: relative;
+        }
+
+        .progress-inner {
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+        }
+
+        .progressDiv {
+            width: 120px;
+            height: 120px;
+            margin: 40px auto 20px;
+            position: relative;
+        }
+
+        #progress {
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(11, 180, 180, 0.4);
+            animation: proRotate 2s infinite;
+        }
+
+        #progressNum {
+            display: block;
+            width: 60px;
+            height: 30px;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: #333;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        #infotext {
+            display: block;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+
+        .canvas-container {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: #ccc;
+            position: relative;
+        }
+
+        #canvas {
+            width: 100%;
+            height: auto;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: #fff;
+            position: absolute;
+            /*transform-origin: 50% 50%;
+            transform: rotate(90deg);*/
+        }
+
+        .swiper-container {
+            /*  width: 320px;
+    height: 480px;*/
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+
+
+        .swiper-slide {
+            width: 100%;
+            height: 100%;
+            background: url(upload/bg.jpg) no-repeat left top;
+            background-size: 100% 100%;
+        }
+
+        img {
+            display: block;
+        }
+
+        .swiper-pagination-bullet {
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            opacity: .4;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+
+        .text-container {
+            width: 300px;
+            height: 300px;
+            margin: 86px auto;
+        }
+
+        .text-container p {
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .page11 .click-album {
+            width: 220px;
+            height: 46px;
+            margin: 0 auto;
+            margin-bottom: 46px;
+            color: white;
+            font-size: 20px;
+            background: #29f;
+            text-align: center;
+            line-height: 46px;
+        }
+
+        .canvas-text {
+            width: 100%;
+            height: 150px;
+            position: absolute;
+            top: 10px;
+        }
+
+        .canvas-text p {
+            text-align: center;
+            line-height: 30px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .canvas-container .click-three {
+            width: 220px;
+            height: 46px;
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            bottom: 46px;
+            color: white;
+            font-size: 20px;
+            background: #29f;
+            text-align: center;
+            line-height: 46px;
+        }
+
+        .page-num {
+            display: block;
+            width: 100%;
+            height: 20px;
+            text-align: center;
+            color: #444;
+            font-size: 16px;
+            text-align: center;
+            line-height: 20px;
+            position: absolute;
+            bottom: 110px;
+            z-index: 5;
+        }
+
+        .three-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: none;
+        }
+
+
+
+        #pre {
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            left: 30px;
+            bottom: 80px;
+            background: rgba(199, 199, 222, 0.6);
+            color: #666;
+            line-height: 70px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        #next {
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            right: 30px;
+            bottom: 80px;
+            background: rgba(199, 199, 222, 0.6);
+            color: #666;
+            line-height: 70px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        @keyframes proRotate {
+            0% {
+                width: 60px;
+                height: 60px;
+                transform: rotate(0);
+                background: rgba(11, 180, 180, 0.4);
+            }
+            50% {
+                width: 80px;
+                height: 80px;
+                transform: rotate(180deg);
+                background: rgba(11, 180, 180, 0.5);
+            }
+            100% {
+                width: 60px;
+                height: 60px;
+                transform: rotate(360deg);
+                background: rgba(11, 180, 180, 0.4);
+            }
+        }
+
+        @-moz-keyframes proRotate
+        /* Firefox */
+
+        {
+            0% {
+                width: 60px;
+                height: 60px;
+                transform: rotate(0);
+                background: rgba(11, 180, 180, 0.4);
+            }
+            50% {
+                width: 80px;
+                height: 80px;
+                transform: rotate(180deg);
+                background: rgba(11, 180, 180, 0.5);
+            }
+            100% {
+                width: 60px;
+                height: 60px;
+                transform: rotate(360deg);
+                background: rgba(11, 180, 180, 0.4);
+            }
+        }
+
+        @-webkit-keyframes proRotate
+        /* Safari 和 Chrome */
+
+        {
+            0% {
+                width: 60px;
+                height: 60px;
+                transform: rotate(0);
+                background: rgba(11, 180, 180, 0.4);
+            }
+            50% {
+                width: 80px;
+                height: 80px;
+                transform: rotate(180deg);
+                background: rgba(11, 180, 180, 0.5);
+            }
+            100% {
+                width: 60px;
+                height: 60px;
+                transform: rotate(360deg);
+                background: rgba(11, 180, 180, 0.4);
+            }
+        }
+
+        @-o-keyframes proRotate
+        /* Opera */
+
+        {
+            0% {
+                width: 60px;
+                height: 60px;
+                transform: rotate(0);
+                background: rgba(11, 180, 180, 0.4);
+            }
+            50% {
+                width: 80px;
+                height: 80px;
+                transform: rotate(180deg);
+                background: rgba(11, 180, 180, 0.5);
+            }
+            100% {
+                width: 60px;
+                height: 60px;
+                transform: rotate(360deg);
+                background: rgba(11, 180, 180, 0.4);
+            }
+        }
+
+        @-webkit-keyframes tipmove {
+            0% {
+                bottom: 10px;
+                opacity: 0
+            }
+            50% {
+                bottom: 15px;
+                opacity: 1
+            }
+            100% {
+                bottom: 20px;
+                opacity: 0
+            }
+        }
+
+        .ani {
+            position: absolute;
+        }
+
+        .txt {
+            position: absolute;
+        }
+
+        #array {
+            position: absolute;
+            z-index: 999;
+            -webkit-animation: tipmove 1.5s infinite ease-in-out;
+        }
+    </style>
+    <link rel="stylesheet" href="./swiper/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="./swiper/animate.min.css">
+</head>
+
+<body>
+    <div class="progress-container">
+        <div class="progress-inner">
+            <div class="progressDiv">
+                <div id="progress"></div>
+                <i id="progressNum">0%</i>
+            </div>
+            <p id="infotext">资源加载中，请稍等。。。</p>
+        </div>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <section class="swiper-slide page1">
+
+                <img src="./image/PAGE1_4.png" class="ani resize" style="width:300px;height:auto;right:0px;top:80px;z-index:3;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+                <img src="./image/PAGE1_7.png" class="ani resize" style="width:300px;height:atuo;left:0px;top:260px;z-index:1;" swiper-animate-effect="fadeIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+
+            </section>
+            <section class="swiper-slide page2">
+                <img src="./image/PAGE2_4.png" class="ani resize" style="width:140px;height:auto;left:10px;top:40px;z-index:5; border-radius:20px;"
+                    swiper-animate-effect="fadeInLeft" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+                <img src="./image/PAGE2_5.png" class="ani resize" style="width:140px;height:auto;left:160px;top:150px;z-index:4;" swiper-animate-effect="fadeInRight"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.9s">
+                <img src="./image/PAGE2_6.png" class="ani resize" style="width:140px;height:auto;left:10px;top:260px;z-index:3;" swiper-animate-effect="fadeInLeft"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+            </section>
+            <section class="swiper-slide page3">
+
+                <img src="./image/PAGE3_6.png" class="ani resize" style="width:220px;height:auto;right:20px;top:20px;z-index:3;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+                <img src="./image/PAGE3_7.png" class="ani resize" style="width:220px;height:atuo;left:20px;top:170px;z-index:1;" swiper-animate-effect="fadeIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+                <img src="./image/PAGE3_8.png" class="ani resize" style="width:220px;height:auto;right:20px;top:330px;z-index:2;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.9s">
+
+            </section>
+            <section class="swiper-slide page4">
+
+                <img src="./image/PAGE4_4.png" class="ani resize" style="width:100px;height:auto;left:5px;top:90px;z-index:3;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+                <img src="./image/PAGE4_6.png" class="ani resize" style="width:200px;height:atuo;left:110px;top:95px;z-index:1;" swiper-animate-effect="fadeIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+                <img src="./image/PAGE4_7.png" class="ani resize" style="width:300px;height:auto;right:10px;top:250px;z-index:2;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.9s">
+
+            </section>
+            <section class="swiper-slide page5">
+
+                <img src="./image/PAGE5_2.png" class="ani resize" style="width:160px;height:auto;right:0;top:160px;z-index:3;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+                <img src="./image/PAGE5_3.png" class="ani resize" style="width:160px;height:atuo;left:0;top:160px;z-index:1;" swiper-animate-effect="fadeIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+                <img src="./image/PAGE5_4.png" class="ani resize" style="width:160px;height:auto;right:0;top:250px;z-index:2;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.9s">
+                <img src="./image/PAGE5_5.png" class="ani resize" style="width:160px;height:auto;left:0;top:270px;z-index:4;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="1.2s">
+
+            </section>
+            <section class="swiper-slide page6">
+
+                <img src="./image/PAGE6_5.png" class="ani resize" style="width:160px;height:auto;right:0px;top:100px;z-index:3;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+                <img src="./image/PAGE6_7.png" class="ani resize" style="width:160px;height:atuo;left:0px;top:200px;z-index:1;" swiper-animate-effect="fadeIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+
+            </section>
+            <section class="swiper-slide page7">
+
+                <img src="./image/PAGE7_4.png" class="ani resize" style="width:240px;height:auto;left:40px;top:10px;z-index:3;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+                <img src="./image/PAGE7_6.png" class="ani resize" style="width:240px;height:atuo;left:40px;top:160px;z-index:1;" swiper-animate-effect="fadeIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+
+            </section>
+            <section class="swiper-slide page8">
+
+                <img src="./image/PAGE8_4.png" class="ani resize" style="width:240px;height:auto;left:40px;top:20px;z-index:3;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+                <img src="./image/PAGE8_2.png" class="ani resize" style="width:240px;height:atuo;left:40px;top:300px;z-index:1;" swiper-animate-effect="fadeIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+
+            </section>
+            <section class="swiper-slide page9">
+
+                <img src="./image/PAGE9_11.png" class="ani resize" style="width:100px;height:auto;left:5px;top:90px;z-index:3;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+                <img src="./image/PAGE9_3.png" class="ani resize" style="width:200px;height:atuo;left:110px;top:95px;z-index:1;" swiper-animate-effect="fadeIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+                <img src="./image/PAGE9_10.png" class="ani resize" style="width:300px;height:auto;right:10px;top:250px;z-index:2;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.9s">
+
+            </section>
+            <section class="swiper-slide page10">
+
+                <img src="./image/PAGE10_5.png" class="ani resize" style="width:300px;height:auto;right:0px;top:40px;z-index:3;" swiper-animate-effect="bounceIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.6s">
+                <img src="./image/PAGE10_8.png" class="ani resize" style="width:300px;height:atuo;left:0px;top:260px;z-index:1;" swiper-animate-effect="fadeIn"
+                    swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+
+            </section>
+            <section class="swiper-slide page11">
+                <div class="text-container">
+                    <p>照片是生活中珍贵的记忆</p>
+                    <p>但却经常是杂乱无章</p>
+                    <p>让我们帮你将它们整理</p>
+                    <p>让记忆</p>
+                    <p>成为你的专属动画</p>
+                </div>
+                <div class="click-album">
+                    点击生成电子相册
+                </div>
+            </section>
+        </div>
+        <img src="./res/down.png" style="width:20px;height:15px; top:460px; left:150px;" id="array" class="resize">
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="canvas-container">
+        <div class="canvas-text">
+            <p>手机里的照片终将被遗忘</p>
+            <p>只有书和相册能将回忆刻下</p>
+            <p>让我们将记忆镌刻成册</p>
+            <p>捧在手心里细嗅芬芳</p>
+        </div>
+        <canvas id="canvas"></canvas>
+        <p class="page-num"><span id="curPageNum">0</span>/<span id="totalPageNum">0</span></p>
+        <div class="click-three">
+            点击生成我的相册
+        </div>
+    </div>
+
+    <div class="three-container">
+        <div id="pre">
+            <<</div>
+                <div id="next">>></div>
+        </div>
+
+        <script src="./jquery/jquery.min.js"></script>
+        <script src="./hammer/hammer.min.js"></script>
+        <script src="./three/three.js"></script>
+        <script src="./three/OrbitControls.js"></script>
+        <script src="./preload/createjs-2015.11.26.min.js"></script>
+        <script src="./swiper/swiper-3.4.2.jquery.min.js"></script>
+        <script src="./swiper/swiper.animate1.0.2.min.js"></script>
+        <script src="./xmlToJson.js"></script>
+        <script src="./img.js"></script>
+</body>
+<script>
+    var queue = new createjs.LoadQueue(true);
+    var scene, camera, renderer, orbit;
+    var pageW = 100;
+    var pageH = 80;
+    var pageDep = 0.2;
+    var pageUrl = [];
+    var tpages = [];
+    var pageY = 0;
+    var tCurPage = 0;
+
+    var turing = '';
+    var turV = 0;
+    var turA = 0;
+
+
+
+    queue.on("fileload", handleFileLoad, this);
+    queue.on("complete", handleComplete, this);
+    queue.loadFile({ src: "./res/Music.mp3", type: createjs.AbstractLoader.SOUND });
+    queue.loadFile({ src: "./res/Cover1.jpg", type: createjs.AbstractLoader.IMAGE });
+    pageUrl.push("./res/Cover1.jpg");
+    for (var i = 1; i <= 10; i++) {
+        var url = './res/page' + i + '.jpg';
+        pageUrl.push(url);
+        queue.loadFile({ src: url, type: createjs.AbstractLoader.IMAGE })
+    }
+    pageUrl.push("./res/Cover1.jpg");
+    var imgIndex = 0;
+
+    function handleFileLoad() {
+        $('#progressNum').html(Math.floor(queue.progress * 100) + '%');
+        imgIndex++;
+    }
+    function handleComplete() {
+        $('#infotext').html('资源加载完成');
+        $('.progress-container').hide();
+        $('.swiper-container').show();
+        createSwiper();
+    }
+
+    var book1Data = zsj.xmlToJson('Nemobook.xml');
+
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    canvas.width = book1Data[0].width;
+    canvas.height = book1Data[0].height;
+    // canvas.style.position = 'absolute';
+    // canvas.style.top = '0';
+    // canvas.style.left = '0';
+    var index = 0;
+    var pages = 0;
+    var imgArray = [];
+    var pageArray = [];
+    var curPageIndex = 0;
+
+    for (var m = 0; m < book1Data.length; m++) {
+        var page = new zsj.Page(m, book1Data[0].width, book1Data[0].height);
+        for (var n = 0; n < book1Data[m].item.length; n++) {
+            var x = book1Data[m].item[n].x;
+            var y = book1Data[m].item[n].y;
+            var height = book1Data[m].item[n].height;
+            var width = book1Data[m].item[n].width;
+            var url = './image/' + book1Data[m].item[n].file;
+            queue.loadFile({ src: url, type: createjs.AbstractLoader.IMAGE });
+            var startIndex = m * 800 + n * 60;
+            var imgElement = new zsj.CreateImg(url, x, y, width, height, startIndex);
+            page._imgArray.push(imgElement);
+        }
+        page.init();
+        pageArray.push(page);
+    }
+
+    var scaleW, scaleH;
+    var resizes = [];
+    var scales, mySwiper;
+    var cameraA = 0;
+
+    function createSwiper() {
+        scaleW = window.innerWidth / 320;
+        scaleH = window.innerHeight / 480;
+        var resizes = document.querySelectorAll('.resize');
+        for (var j = 0; j < resizes.length; j++) {
+            resizes[j].style.width = parseInt(resizes[j].style.width) * scaleW + 'px';
+            resizes[j].style.height = parseInt(resizes[j].style.height) * scaleH + 'px';
+            resizes[j].style.top = parseInt(resizes[j].style.top) * scaleH + 'px';
+            resizes[j].style.left = parseInt(resizes[j].style.left) * scaleW + 'px';
+        }
+        var scales = document.querySelectorAll('.txt');
+        for (var i = 0; i < scales.length; i++) {
+            ss = scales[i].style;
+            ss.webkitTransform = ss.MsTransform = ss.msTransform = ss.MozTransform = ss.OTransform = ss.transform = 'translateX(' + scales[i].offsetWidth * (scaleW - 1) / 2 + 'px) translateY(' + scales[i].offsetHeight * (scaleH - 1) / 2 + 'px)scaleX(' + scaleW + ') scaleY(' + scaleH + ') ';
+        }
+
+        var mySwiper = new Swiper('.swiper-container', {
+            direction: 'vertical',
+            pagination: '.swiper-pagination',
+            mousewheelControl: true,
+            onInit: function (swiper) {
+                swiperAnimateCache(swiper);
+                swiperAnimate(swiper);
+            },
+            onSlideChangeEnd: function (swiper) {
+                swiperAnimate(swiper);
+            }
+        })
+
+    }
+
+
+    $('.click-album').on('click', function () {
+        $('.swiper-container').hide();
+        $('.canvas-container').show();
+        pageMoveIn();
+        addSwipe();
+    })
+    $('.click-three').on('click', function () {
+        pageMoveOut();
+        $('.canvas-container').hide();
+        $('.three-container').show();
+        createThree();
+        createAlbum();
+        addPan();
+        animate();
+    })
+
+    function pageMoveIn() {
+        pageArray[curPageIndex].uninit();
+        pageArray[curPageIndex].moveIn(context);
+        $('#curPageNum').html(curPageIndex+1);
+        $('#totalPageNum').html(pageArray.length);
+        if(curPageIndex!=(pageArray.length-1)){
+            $('.click-three').hide();
+            $('.canvas-text').hide();
+        }else{
+            $('.click-three').show();
+            $('.canvas-text').show();
+        }
+    }
+    function pageMoveOut() {
+        pageArray[curPageIndex].uninit();
+        pageArray[curPageIndex].moveOut(context);
+    }
+
+    function pagePre() {
+        if (curPageIndex <= 0) {
+            return;
+        }
+        var curPage = pageArray[curPageIndex];
+        switch (curPage._status) {
+            case 'ready':
+                curPageIndex--;
+                curPage.moveOut(context, pageMoveIn);
+                break;
+            case 'moveIn':
+                window.cancelAnimationFrame(curPage._moveInInterval);
+                curPageIndex--;
+                curPage.moveOut(context, pageMoveIn);
+                break;
+            case 'moveOut':
+                window.cancelAnimationFrame(curPage._moveOutInterval);
+                curPage._moveTime = curPage._moveOutTime;
+                curPageIndex--;
+                curPage.moveOut(context, pageMoveIn);
+                break;
+            default:
+                break;
+        }
+    }
+    function pageNext() {
+        if (curPageIndex >= (pageArray.length - 1)) {
+            return;
+        }
+        var curPage = pageArray[curPageIndex];
+        switch (curPage._status) {
+            case 'ready':
+                curPageIndex++;
+                curPage.moveOut(context, pageMoveIn);
+                // pageArray[curPageIndex].uninit();
+                // pageArray[curPageIndex].moveIn(context);
+                break;
+            case 'moveIn':
+                window.cancelAnimationFrame(curPage._moveInInterval);
+                curPageIndex++;
+                curPage.moveOut(context, pageMoveIn);
+                break;
+            case 'moveOut':
+                window.cancelAnimationFrame(curPage._moveOutInterval);
+                curPage._moveTime = curPage._moveOutTime;
+                curPageIndex++;
+                curPage.moveOut(context, pageMoveIn);
+                break;
+            default:
+                break;
+        }
+    }
+
+    function addSwipe() {
+        var canvasDom = document.getElementById('canvas');
+
+        // create a simple instance
+        // by default, it only adds horizontal recognizers
+        var mc = new Hammer(canvasDom);
+
+        // let the pan gesture support all directions.
+        // this will block the vertical scrolling on a touch-device while on the element
+        mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+
+        // listen to events...
+        mc.on("swipeup", function (ev) {
+            pageNext();
+        });
+        mc.on("swipedown", function (ev) {
+            pagePre();
+        });
+    }
+
+    function addPan() {
+        var canvasDom = $('.three-container').find('canvas')[0];
+
+        // create a simple instance
+        // by default, it only adds horizontal recognizers
+        var mc = new Hammer(canvasDom);
+
+        // let the pan gesture support all directions.
+        // this will block the vertical scrolling on a touch-device while on the element
+        mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+
+        // listen to events...
+        mc.on("panup", function (ev) {
+            cameraA -= 0.05;
+            if (cameraA <= -Math.PI / 2) {
+                cameraA = -Math.PI / 2;
+            }
+            camera.position.y = Math.sin(cameraA) * 200;
+            camera.position.z = Math.cos(cameraA) * 200;
+        });
+        mc.on("pandown", function (ev) {
+            cameraA += 0.05;
+            if (cameraA >= Math.PI / 2) {
+                cameraA = Math.PI / 2;
+            }
+            camera.position.y = Math.sin(cameraA) * 200;
+            camera.position.z = Math.cos(cameraA) * 200;
+        });
+        mc.on("panleft", function (ev) {
+            camera.position.x += 1.5;
+        });
+        mc.on("panright", function (ev) {
+            camera.position.x -= 1.5;
+        });
+
+        $('#pre').on('click', function () {
+
+            if ((turing == '') && tCurPage > 0) {
+                tCurPage -= 1;
+                for (var n = 0; n < tCurPage; n++) {
+                    (function (n) {
+                        tpages[n].position.z += pageDep;
+                    })(n);
+                }
+                turing = 'pre';
+                turV = 0.04;
+            }
+        })
+        $('#next').on('click', function () {
+            if ((turing == '') && tCurPage < (tpages.length - 1)) {
+                if (tCurPage != tpages.length) {
+                    for (var n = tCurPage; n < tpages.length; n++) {
+                        (function (n) {
+                            tpages[n].position.z += pageDep;
+                        })(n);
+                    }
+                }
+                turing = 'next';
+                turV = -0.04;
+            }
+        })
+    }
+
+    function createThree() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 500);
+
+        renderer = new THREE.WebGLRenderer({
+            antialias: true,//antialias:true/false是否开启反锯齿
+            precision: "highp",//precision:highp/mediump/lowp着色精度选择
+            alpha: true,//alpha:true/false是否可以设置背景色透明
+            premultipliedAlpha: false,//?
+            stencil: false,//?
+            preserveDrawingBuffer: true,//preserveDrawingBuffer:true/false是否保存绘图缓冲
+            maxLights: 1//maxLights:最大灯光数
+        });
+        var tw = $('.three-container').width();
+        var th = $('.three-container').height();
+        console.log(tw, th);
+        renderer.setSize(tw, th);
+        renderer.setClearColor(0xdddddd, 1);
+        $('.three-container')[0].appendChild(renderer.domElement);
+        // renderer.setClearColorHex(0xFFFFFF, 1.0);//设置canvas背景色(clearColor)
+
+        orbit = new THREE.OrbitControls(camera, renderer.domElement);
+        orbit.enableZoom = true;
+        orbit.enableRotate = false;
+        orbit.enablePan = false;
+
+        camera.position.z = 200;
+        var light = new THREE.AmbientLight(0xffffff, 1.0, 0);//设置平行光源
+        // light.position.set(200, 200, 200);//设置光源向量
+        scene.add(light);// 追加光源到场景
+
+        var geometry = new THREE.CubeGeometry(pageW, pageH, pageDep);
+        geometry.translate(pageW / 2, 0, pageDep / 2);
+        var material = new THREE.MeshPhongMaterial({ color: 0x222222 });
+        mesh = new THREE.Mesh(geometry, material);
+
+        scene.add(mesh);
+
+    }
+
+    function createAlbum() {
+        for (var i = 0; i < pageUrl.length; i++) {
+            if (i == (pageUrl.length - 1)) {
+                var url = pageUrl[i];
+                createPage(url, null);
+            } else {
+                var url = pageUrl[i];
+                createPage(null, url);
+            }
+        }
+
+    }
+
+    function createPage(url1, url2) {
+        // var material = new THREE.MeshPhongMaterial({ ambient: 0x050505, color: 0x88ddff, specular: 0x555555, shininess: 30 });
+        var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+
+        // var material = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('./flappy/LOGO.png') } );
+
+        var material2;
+        var material6;
+        if (url1) {
+            material2 = new THREE.MeshPhongMaterial({
+                map: THREE.ImageUtils.loadTexture(url1)
+            });
+        } else {
+            material2 = material;
+        }
+        if (url2) {
+            material6 = new THREE.MeshPhongMaterial({
+                map: THREE.ImageUtils.loadTexture(url2)
+            });
+        } else {
+            material6 = material;
+        }
+        var materials = [material, material, material, material, material6, material2];
+        var meshFaceMaterial = new THREE.MeshFaceMaterial(materials);
+        // meshFaceMaterial.transparent = true;
+        var geometry = new THREE.CubeGeometry(pageW, pageH, pageDep);
+        geometry.translate(pageW / 2, 0, pageDep / 2);
+        mesh = new THREE.Mesh(geometry, materials);
+        mesh.position.z = pageY;
+        tpages.push(mesh);
+        pageY -= pageDep;
+        scene.add(mesh);
+    }
+
+    var animate = function () {
+        requestAnimationFrame(animate);
+        // camera.rotation.y-=0.1;
+        // mesh.rotation.y+=0.05;
+        camera.lookAt({
+            x: camera.position.x,
+            y: 0,
+            z: 0
+        })
+
+        switch (turing) {
+            case 'pre':
+                turA += turV;
+                if (turA > Math.PI) {
+                    tpages[tCurPage].rotation.y = 0;
+                } else {
+                    tpages[tCurPage].rotation.y = Math.PI + turA;
+                }
+                if (turA > Math.PI) {
+                    turA = 0;
+                    turing = '';
+                    for (var n = tCurPage; n < tpages.length; n++) {
+                        (function (n) {
+                            tpages[n].position.z -= pageDep;
+                        })(n);
+                    }
+                }
+                break;
+            case 'next':
+                turA += turV;
+                if (turA < -Math.PI) {
+                    tpages[tCurPage].rotation.y = -Math.PI;
+                } else {
+                    tpages[tCurPage].rotation.y = turA;
+                }
+                // pages[curPage].rotateOnAxis(new THREE.Object3D(0,0,0),10);
+                if (turA < - Math.PI) {
+                    turA = 0;
+                    turing = '';
+                    for (var n = 0; n < tCurPage; n++) {
+                        (function (n) {
+                            tpages[n].position.z -= pageDep;
+                        })(n);
+                    }
+                    tCurPage += 1;
+                }
+                break;
+            default:
+                break;
+        }
+
+        renderer.render(scene, camera);
+    };
+
+</script>
+
+</html>
