@@ -1,0 +1,374 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.leftContainer {
+    width: 100%;
+    height: 100%;
+    /*background: #eae;*/
+    position: relative;
+    transition: all 0.5s linear;
+}
+
+.leftBack {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.videoOuter {
+    position: absolute;
+    width: 800px;
+    height: 665px;
+    background: #eee;
+    overflow: hidden;
+    box-shadow: 0 0 5px 2px #444;
+}
+
+.leftPlayer {
+    width: 800px;
+    height: 600px;
+    float: left;
+    margin: 0;
+}
+.leftPlayer:hover+.valueBox{
+    left: 10px;
+}
+
+.controlBar {
+    width: 800px;
+    height: 60px;
+    background: #222;
+    margin: 0;
+    float: left;
+}
+
+.valueBox{
+    width: 50px;
+    height: 100px;
+    position: absolute;
+    margin: auto;
+    top: 250px;
+    left:-50px;
+    transition: all 0.3s linear; 
+}
+.valueBox:hover{
+    left:10px;
+}
+
+.videoValue1x {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: rgba(220, 220, 220, 0.6);
+    border-radius: 50%;
+    margin: 0;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #444;
+    cursor: pointer;
+}
+
+.videoValue2x {
+    margin: 0;
+    display: block;
+    margin-top: 10px;
+    width: 40px;
+    height: 40px;
+    background: rgba(220, 220, 220, 0.6);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #444;
+    cursor: pointer;
+}
+.curVideoValue{
+    background: rgba(120,120,120,0.7);
+    color:#eee;
+}
+.progress{
+    float: left;
+    width: 100%;
+    height: 5px;
+    background: red;
+    cursor: pointer;
+}
+#progressDis{
+    margin: 0;
+    background: aquamarine;
+    width: 0%;
+    height: 100%;
+}
+
+.controlBar svg {
+    cursor: pointer;
+}
+
+.videoInfo {
+    width: 200px;
+    height: 60px;
+    float: left;
+    margin: 0;
+    font-size: 17px;
+    color: #fff;
+}
+
+#videoName {
+    display: block;
+    width: 200px;
+    height: 30px;
+    float: left;
+    margin: 0;
+    line-height: 30px;
+    text-align: center;
+    overflow: hidden;
+}
+
+#videoTime {
+    display: block;
+    width: 200px;
+    height: 30px;
+    float: left;
+    margin: 0;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.videoLeft {
+    width: 240px;
+    height: 60px;
+    float: left;
+    font-size: 20px;
+    color: #fff;
+    line-height: 60px;
+    overflow: hidden;
+}
+
+.videoLeft span {
+    display: block;
+    float: left;
+    text-align: center;
+    font-size: 32px;
+}
+
+.videoCenter {
+    width: 240px;
+    height: 60px;
+    float: left;
+    font-size: 20px;
+    color: #fff;
+    line-height: 60px;
+}
+
+.videoCenter span {
+    display: block;
+    float: left;
+    text-align: center;
+    line-height: 60px;
+    font-size: 28px;
+}
+
+#videoPause {
+    display: none;
+}
+
+#videoNoval {
+    display: none;
+}
+
+#valRange input {
+    width: 150px;
+    height: 60px;
+}
+
+.videoRight {
+    width: 120px;
+    height: 60px;
+    float: left;
+    font-size: 20px;
+    color: #fff;
+    line-height: 60px;
+}
+
+.videoRight span {
+    display: block;
+    float: left;
+    text-align: center;
+    font-size: 25px;
+}
+
+#videoLoop {
+    font-size: 31px;
+}
+
+.leftShow1 {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 50px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    animation: show1 1.2s infinite;
+    cursor: pointer;
+}
+
+.leftShow2 {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 70px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transform-origin: 50% 50%;
+    background: rgba(255, 255, 255, 0.8);
+    animation: show2 1.2s infinite;
+    cursor: pointer;
+}
+
+.rightContainer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: rgba(200, 255, 200, 0.3);
+    transition: all 0.5s linear;
+}
+
+.rightContainer .listText {
+    height: 70px;
+    font-size: 21px;
+    line-height: 70px;
+    text-align: center;
+    overflow: hidden;
+    background: rgba(40, 180, 40, 0.3);
+    color: #444;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.rightContainer .listText:hover {
+    background: rgba(30, 200, 30, 0.4);
+}
+
+.rightContainer .listBox {
+    overflow: hidden;
+    height: 0px;
+}
+
+.rightContainer .listBox .boxItem {
+    background: rgba(120, 240, 120, 0.5);
+    border-bottom: 1px solid #cec;
+}
+
+.rightContainer .listBox .boxItem:hover {
+    background: rgba(80, 210, 90, 0.4);
+}
+
+.rightContainer .listBox .boxItem .itemName {
+    width: 80%;
+    float: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.rightContainer .listBox .boxItem .itemDel {
+    display: block;
+    width: 20%;
+    float: left;
+}
+
+.rightContainer .listBox .boxItem .itemDel:hover {
+    background: rgba(220, 220, 220, 0.3);
+    color: #333;
+}
+
+.rightContainer .listBox .localItem {
+    display: block;
+    font-size: 19px;
+    line-height: 60px;
+    text-align: center;
+    height: 60px;
+    color: #666;
+    cursor: pointer;
+}
+
+.rightContainer .listBox .serverItem {
+    display: block;
+    font-size: 19px;
+    line-height: 60px;
+    height: 60px;
+    text-align: center;
+    color: #666;
+    cursor: pointer;
+}
+
+.rcwidth1 {
+    width: 20%;
+}
+
+@keyframes show1 {
+    from {
+        width: 60px;
+        height: 60px;
+        right: 50px;
+        background: rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        width: 20px;
+        height: 20px;
+        right: 70px;
+        background: rgba(255, 255, 255, 0.8);
+    }
+    to {
+        width: 60px;
+        height: 60px;
+        right: 50px;
+        background: rgba(255, 255, 255, 0.5);
+    }
+}
+
+@keyframes show2 {
+    from {
+        width: 20px;
+        height: 20px;
+        right: 70px;
+        background: rgba(255, 255, 255, 0.8);
+    }
+    50% {
+        width: 60px;
+        height: 60px;
+        right: 50px;
+        background: rgba(255, 255, 255, 0.5);
+    }
+    to {
+        width: 20px;
+        height: 20px;
+        right: 70px;
+        background: rgba(255, 255, 255, 0.8);
+    }
+}

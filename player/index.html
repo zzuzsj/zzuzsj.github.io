@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zplauer</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="container" class="container">
+        <img src="./res/3.jpg" id="backgImage" alt="背景图片" class="leftBack blur-filter">
+        <div id="videoConrainer" class="leftContainer">
+            <div class="videoOuter absolute-middle">
+                <video src="./ShiningMice.mp4" poster="./res/poster.jpg" id="videoPlayer" class="leftPlayer" preload="preload"></video>
+                <div class="valueBox">
+                    <span class="videoValue1x curVideoValue">1x</span>
+                    <span class="videoValue2x">2x</span>
+                </div>
+                <div id="progressBar" class="progress">
+                    <div id="progressDis"></div>
+                </div>
+                <div class="controlBar">
+                    <div class="videoInfo">
+                        <span id="videoName">这是电影名</span>
+                        <span id="videoTime"><span id="curTime">00:00:00</span> / <span id="totalTime">00:00:00</span></span>
+                    </div>
+                    <div class="videoLeft">
+                        <span id="videoPre" class="col-3">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-bofangqi_shouyeshangyishou_"></use>
+                            </svg>
+                        </span>
+                        <span id="videoPlay" class="col-3">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-bofangqi_shouyebofang_"></use>
+                            </svg>
+                        </span>
+                        <span id="videoPause" class="col-3 hidden-dom">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-bofangqi_shouyezanting_"></use>
+                            </svg>
+                        </span>
+                        <span id="videoEnd" class="col-3">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-tingzhi"></use>
+                            </svg>
+                        </span>
+                        <span id="videoNext" class="col-3">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-bofangqi_shouyexiayishou_"></use>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="videoCenter">
+                        <span id="videoVal" class="col-3">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-bofangqi_shengyin"></use>
+                            </svg>
+                        </span>
+                        <span id="videoNoval" class="col-3 hidden-dom">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-bofangqi_shengyinwu"></use>
+                            </svg>
+                        </span>
+                        <span id="valRange" class="col-9">
+                            <input type="range" max="1" min="0" value="1" step="0.01">
+                        </span>
+                    </div>
+                    <div class="videoRight">
+                        <span id="videoLoop" class="col-6">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-bofangqi_danquxunhuan_"></use>
+                            </svg>
+                        </span>
+                        <span id="videoFull" class="col-6">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-bofangqiquanping"></use>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="show1" class="leftShow1 show"></div>
+            <div id="show2" class="leftShow2 show"></div>
+        </div>
+        <div id="listContainer" class="rightContainer width-0">
+            <div id="localList" class="listText col-12">本地列表</div>
+            <div id="localListBox" class="listBox col-12">
+            </div>
+            <div id="serverList" class="listText col-12">在线列表</div>
+            <div id="serverListBox" class="listBox col-12">
+            </div>
+        </div>
+    </div>
+    <script src="//at.alicdn.com/t/font_s1c0xke452ricnmi.js" type="text/javascript"></script>
+    <script src="../jquery.min.js"></script>
+    <script src="../util/fileReader.js"></script>
+    <script src="../util/videoPlayer.js"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
