@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To MieMie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+         ::-webkit-scrollbar {
+            display: none;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        #contentDiv {
+            width: 100%;
+            height: 100%;
+        }
+
+        #download {
+            display: block;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        #thumbBox {
+            height: 300px;
+            background: rgba(202, 222, 211, 0.6);
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            right: 10px;
+            transition: all 0.5s linear;
+        }
+
+        .box-w0 {
+            width: 0;
+        }
+
+        .box-w1 {
+            width: 80px;
+        }
+
+        #thumbBoxContainer {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .thumbList {
+            width: 100%;
+            height: 100%;
+            right: 0;
+            overflow: scroll;
+            position: absolute;
+        }
+
+        .thumbListBox {
+            width: 100%;
+            height: 80px;
+            margin: 10px 0 0 0;
+            float: left;
+            position: relative;
+        }
+
+        .thumbListImg {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 80px;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .containerList {
+            display: none;
+            width: 100%;
+            height: 100%;
+            right: 0;
+            overflow: scroll;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="contentDiv"></div>
+    <!--<a id="download">Download</a>-->
+    <div id="thumbBox" class="box-w0">
+        <div id="thumbBoxContainer">
+            <div id="thumb-container" class="thumbList">
+                <div class="thumbListBox" data-thumb="haircut">
+                    <img src="./nn/thumb/thumb_0.png" alt="" class="thumbListImg">
+                </div>
+                <div class="thumbListBox" data-thumb="face">
+                    <img src="./nn/thumb/thumb_6.png" alt="" class="thumbListImg">
+                </div>
+                <div class="thumbListBox" data-thumb="cloth">
+                    <img src="./nn/thumb/thumb_1.png" alt="" class="thumbListImg">
+                </div>
+                <div class="thumbListBox" data-thumb="pants">
+                    <img src="./nn/thumb/thumb_3.png" alt="" class="thumbListImg">
+                </div>
+                <div class="thumbListBox" data-thumb="shoes">
+                    <img src="./nn/thumb/thumb_2.png" alt="" class="thumbListImg">
+                </div>
+                <div class="thumbListBox" data-thumb="sock">
+                    <img src="./nn/thumb/thumb_8.png" alt="" class="thumbListImg">
+                </div>
+                <div class="thumbListBox" data-thumb="back">
+                    <img src="./nn/thumb/thumb_9.png" alt="" class="thumbListImg">
+                </div>
+            </div>
+            <div id="haircut-container" class="containerList"></div>
+            <div id="cloth-container" class="containerList"></div>
+            <div id="shoes-container" class="containerList"></div>
+            <div id="pants-container" class="containerList"></div>
+            <div id="face-container" class="containerList"></div>
+            <div id="sock-container" class="containerList"></div>
+            <div id="back-container" class="containerList"></div>
+        </div>
+    </div>
+    <script src="../vendor/jquery.min.js"></script>
+    <script>
+        //解决jq与electron冲突问题
+        if (typeof module === 'object') { window.jQuery = window.$ = module.exports; };
+    </script>
+    <script src="../vendor/konva.min.js"></script>
+    <script src="../vendor/hammer.min.js"></script>
+    <script src="./datajson.js"></script>
+    <script src="./main.js"></script>
+    <script>
+        (function () {
+            var materialObj = window.materialObj;
+            var dress = new window.Main($('#contentDiv').width(), $('#contentDiv').height(), materialObj, true);
+            var myElement = document.getElementById('contentDiv');
+            var mc = new Hammer(myElement);
+            mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+            var curState = 'static';
+            dress.bindStage();
+            dress.init();
+            $('#download').on('click', function () {
+                dress.downloadThumb();
+            });
+
+            $('.thumbListBox').on('click', function () {
+                var type = $(this).attr('data-thumb');
+                loadThumbs(type);
+            });
+            $('#thumbBox').on('click', '.containerList>.thumbListBox', function () {
+                var type = $(this).attr('data-type');
+                var index = $(this).attr('data-index');
+                console.log(index);
+                switch (type) {
+                    case 'haircut':
+                        dress.fillImage(dress._haircut, index);
+                        break;
+                    case 'cloth':
+                        dress.fillImage(dress._cloth, index);
+                        break;
+                    case 'face':
+                        dress.fillImage(dress._face, index);
+                        break;
+                    case 'pants':
+                        dress.fillImage(dress._pants, index);
+                        break;
+                    case 'shoes':
+                        dress.fillImage(dress._shoes, index);
+                        break;
+                    case 'sock':
+                        dress.fillImage(dress._sock, index);
+                        break;
+                    case 'back':
+                        dress.fillImage(dress._back, index);
+                        break;
+                    default:
+                        break;
+                }
+            });
+            mc.on("panleft", function (ev) {
+                switch (curState) {
+                    case 'static':
+                        $('#thumbBox').removeClass('box-w0').addClass('box-w1');
+                        curState = 'choose';
+                        break;
+                    case 'dress':
+                        $('.containerList').hide();
+                        $('#thumb-container').show();
+                        curState = 'choose';
+                        break;
+                    default:
+                        break;
+                }
+            });
+            mc.on("panright", function (ev) {
+                switch (curState) {
+                    case 'choose':
+                        $('#thumbBox').removeClass('box-w1').addClass('box-w0');
+                        curState = 'static';
+                        break;
+                    case 'dress':
+                        $('.containerList').hide();
+                        $('#thumb-container').show();
+                        $('#thumbBox').removeClass('box-w1').addClass('box-w0');
+                        curState = 'static';
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            function loadThumbs(type) {
+                var thumbArray = materialObj[type];
+                $('#thumb-container').hide();
+                $('#' + type + '-container').show();
+                curState = 'dress';
+                for (var i = 0; i < thumbArray.length; i++) {
+                    // (function (i) {
+                    var obj = thumbArray[i];
+                    if (obj.image || obj.nosuit) {
+                        continue;
+                    }
+                    var thumbImg = new Image();
+                    thumbImg.src = obj.src;
+                    var $box = $('<div class="thumbListBox" data-type="' + type + '" data-index="' + i + '"></div>');
+                    $box.append($(thumbImg).addClass('thumbListImg'));
+                    $box.appendTo($('#' + type + '-container'));
+                    thumbImg.onload = function () {
+                        obj.image = thumbImg;
+                    }
+                    // })(i);
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
